@@ -1,9 +1,10 @@
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class SolutionTest {
     private static final InputStream OLD_SYSTEM_IN = System.in;
@@ -27,14 +28,28 @@ class SolutionTest {
         System.setOut(OLD_SYSTEM_OUT);
     }
 
+    private static void setInputInBuffer(String inputString) {
+        System.arraycopy(inputString.getBytes(), 0, BUFFER, 0, inputString.length());
+    }
+
     @Test
     void test1() {
-        String inputString = "Hello world!" + System.lineSeparator();
-        System.arraycopy(inputString.getBytes(), 0, BUFFER, 0, inputString.length());
+        String inputString = """
+                3
+                Hello world! - 1
+                Hello world! - 2
+                Hello world! - 3
+                """;
 
+        setInputInBuffer(inputString);
         Solution.main(new String[]{});
 
-        String expected = "Hello world!" + System.lineSeparator();
-        Assertions.assertEquals(expected, outputStream.toString());
+        String expected = """
+                Hello world! - 1
+                Hello world! - 2
+                Hello world! - 3
+                """;
+        assertEquals(expected, outputStream.toString());
     }
+
 }
