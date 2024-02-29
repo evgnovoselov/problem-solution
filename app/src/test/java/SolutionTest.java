@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class SolutionTest {
     private static final InputStream OLD_SYSTEM_IN = System.in;
     private static final PrintStream OLD_SYSTEM_OUT = System.out;
-    private static final byte[] BUFFER = new byte[10240];
+    private static final byte[] BUFFER = new byte[1024 * 10];
     private OutputStream outputStream;
 
     @BeforeEach
